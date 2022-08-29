@@ -10,7 +10,7 @@
     "start:dev": "nodemon -q",
     "test": "jest src --passWithNoTests",
     "test-coverage": "jest src --coverage --watchAll=false --passWithNoTests",
-    "test-watch": "jest src --watchAll",
+    "test:dev": "jest src --watchAll",
     "build": "npm run ts",
     "prepare": "husky install"
   },

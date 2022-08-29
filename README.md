@@ -25,7 +25,8 @@
     ✅ STATUS: 201
 
 ◾ **[PUT]/destinations/update**➡ Recibe un robot completo, realiza las modificaciones en la BD con la misma id y devuelve el objeto destino modificado.
-✅ STATUS: 201
+
+    ✅ STATUS: 201
 
 ◾ **[DELETE]/destinations/delete/:idDestino**➡ elimina de la BD el destino por id y devuelve el objeto eliminado.
 
