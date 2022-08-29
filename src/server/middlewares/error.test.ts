@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import ErrorCustom from "../../utils/ErrorCustom";
-import generalError from "./error";
+import { generalError, notFoundEndpoint } from "./error";
 
 describe("Given a generalError middleware", () => {
   const req = {} as Partial<Request>;
@@ -39,6 +39,34 @@ describe("Given a generalError middleware", () => {
       );
 
       expect(res.json).toHaveBeenCalledWith({ error: expectPublicError });
+    });
+  });
+});
+
+describe("Given a notFoundError middleware", () => {
+  describe("When it receives a response object", () => {
+    const req = {} as Partial<Request>;
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+    } as Partial<Response>;
+
+    test("Then it should invoke the response method status with 404", () => {
+      const status = 404;
+
+      notFoundEndpoint(req as Request, res as Response);
+
+      expect(res.status).toHaveBeenCalledWith(status);
+    });
+
+    test("And then it should invoke the response method json with a 'Endpoint not Found'", () => {
+      const errorResponse = {
+        error: "Endpoint not found",
+      };
+
+      notFoundEndpoint(req as Request, res as Response);
+
+      expect(res.json).toHaveBeenCalledWith(errorResponse);
     });
   });
 });

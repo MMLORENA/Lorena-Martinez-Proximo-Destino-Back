@@ -3,7 +3,7 @@ import { debug } from "console";
 import { NextFunction, Request, Response } from "express";
 import ErrorCustom from "../../utils/ErrorCustom";
 
-const generalError = (
+export const generalError = (
   error: ErrorCustom,
   req: Request,
   res: Response,
@@ -20,4 +20,8 @@ const generalError = (
   res.status(status).json({ error: errorPublicMessage });
 };
 
-export default generalError;
+export const notFoundEndpoint = (req: Request, res: Response) => {
+  debug(chalk.bgRed("Request to endpoint not found"));
+
+  res.status(404).json({ error: "Endpoint not found" });
+};
