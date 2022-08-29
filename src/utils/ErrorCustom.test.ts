@@ -1,4 +1,4 @@
-import CustomError from "./ErrorCustom";
+import ErrorCustom from "./ErrorCustom";
 
 describe("Given the ErrorCustom class", () => {
   describe("When is invocate with 400 code, private and public message", () => {
@@ -7,7 +7,7 @@ describe("Given the ErrorCustom class", () => {
       const expectedPrivateMessage = "Private message";
       const expectedPublicMessage = "Public message";
 
-      const resultError = new CustomError(
+      const resultError = new ErrorCustom(
         expectedStatus,
         expectedPrivateMessage,
         expectedPublicMessage
