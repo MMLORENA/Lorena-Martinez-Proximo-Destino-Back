@@ -2,7 +2,7 @@ interface ErrorWithCode {
   code: string;
 }
 
-class CustomError extends Error implements ErrorWithCode {
+class ErrorCustom extends Error implements ErrorWithCode {
   code: string;
 
   constructor(
@@ -14,4 +14,4 @@ class CustomError extends Error implements ErrorWithCode {
   }
 }
 
-export default CustomError;
+export default ErrorCustom;
