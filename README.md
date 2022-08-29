@@ -22,7 +22,7 @@
 
 ◾ **[POST]/destinations/create**➡ Recibe un objeto Destination sin id para crearlo en la BD y devuelve el mismo objeto con id creada.
 
-     ✅ STATUS: 201
+    ✅ STATUS: 201
 
 ◾ **[PUT]/destinations/update**➡ Recibe un robot completo, realiza las modificaciones en la BD con la misma id y devuelve el objeto destino modificado.
 ✅ STATUS: 201
