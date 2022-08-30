@@ -11,9 +11,9 @@ const debug = Debug("destinos:server:controllers:usersControllers");
 
 const getRegister = async (req: Request, res: Response, next: NextFunction) => {
   const user: UserRegister = req.body;
-  user.password = await createHash(user.password);
 
   try {
+    user.password = await createHash(user.password);
     const newUser = await User.create(user);
     res.status(201).json({ user: newUser });
 
@@ -22,7 +22,7 @@ const getRegister = async (req: Request, res: Response, next: NextFunction) => {
     const customError = new ErrorCustom(
       400,
       error.message,
-      "error creating new user"
+      "Error creating new user"
     );
 
     next(customError);
