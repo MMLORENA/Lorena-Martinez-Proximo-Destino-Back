@@ -16,6 +16,7 @@ const getRegister = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const newUser = await User.create(user);
     res.status(201).json({ user: newUser });
+
     debug(chalk.green("Created newUser"));
   } catch (error) {
     const customError = new ErrorCustom(
