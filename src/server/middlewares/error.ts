@@ -14,7 +14,7 @@ export const generalError = (
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   next: NextFunction
 ) => {
-  const errorCode = error.code;
+  const errorCode = (error as ErrorCustom).code;
   const status = error.statusCode ?? 500;
   let errorPublicMessage = error.publicMessage ?? "General error";
   const errorPrivateMessage = error.privateMessage;
@@ -22,13 +22,13 @@ export const generalError = (
   debug(chalk.bgRedBright(errorPrivateMessage, errorCode));
 
   if (error instanceof ValidationError) {
+    errorPublicMessage = "Wrong data";
     debug(chalk.red("Request validation Error"));
+
     error.details.body.forEach((errorInfo) => {
-      debug(errorInfo.message);
+      debug(chalk.bgBlue(errorInfo.message));
     });
   }
-
-  errorPublicMessage = "Wrong data";
 
   res.status(status).json({ error: errorPublicMessage });
 };

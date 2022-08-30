@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import ErrorCustom from "../../utils/ErrorCustom";
+import TestCustomValidationError from "../../utils/TestCustomValidationError";
 import { generalError, notFoundEndpoint } from "./error";
 
 describe("Given a generalError middleware", () => {
@@ -39,6 +40,32 @@ describe("Given a generalError middleware", () => {
       );
 
       expect(res.json).toHaveBeenCalledWith({ error: expectPublicError });
+    });
+  });
+
+  describe("And a 'Validation Error'", () => {
+    test("Then it should invoke the method json with the message `wrong data' ", () => {
+      const expectedPublicMessage = {
+        error: "Wrong data",
+      };
+      const errorValidate = new TestCustomValidationError(400, "", "");
+      errorValidate.details.body[0] = {
+        message: "wrong data",
+        name: "ValidationError",
+        isJoi: true,
+        details: [],
+        annotate: jest.fn(),
+        _original: "",
+      };
+
+      generalError(
+        errorValidate,
+        req as Request,
+        res as Response,
+        next as NextFunction
+      );
+
+      expect(res.json).toHaveBeenCalledWith(expectedPublicMessage);
     });
   });
 });
