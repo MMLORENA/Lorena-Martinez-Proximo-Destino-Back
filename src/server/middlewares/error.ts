@@ -14,7 +14,7 @@ export const generalError = (
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   next: NextFunction
 ) => {
-  const errorCode = (error as ErrorCustom).code;
+  const errorCode = error.code;
   const status = error.statusCode ?? 500;
   let errorPublicMessage = error.publicMessage ?? "General error";
   const errorPrivateMessage = error.privateMessage;
