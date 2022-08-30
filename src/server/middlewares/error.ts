@@ -1,7 +1,11 @@
+import "../../loadEnvironment";
 import chalk from "chalk";
-import { debug } from "console";
+import Debug from "debug";
 import { NextFunction, Request, Response } from "express";
+import { ValidationError } from "express-validation";
 import ErrorCustom from "../../utils/ErrorCustom";
+
+const debug = Debug("destinos:server:controllers:usersControllers");
 
 export const generalError = (
   error: ErrorCustom,
@@ -12,10 +16,19 @@ export const generalError = (
 ) => {
   const errorCode = error.code;
   const status = error.statusCode ?? 500;
-  const errorPublicMessage = error.publicMessage ?? "General error";
+  let errorPublicMessage = error.publicMessage ?? "General error";
   const errorPrivateMessage = error.privateMessage;
 
   debug(chalk.bgRedBright(errorPrivateMessage, errorCode));
+
+  if (error instanceof ValidationError) {
+    debug(chalk.red("Request validation Error"));
+    error.details.body.forEach((errorInfo) => {
+      debug(errorInfo.message);
+    });
+  }
+
+  errorPublicMessage = "Wrong data";
 
   res.status(status).json({ error: errorPublicMessage });
 };
