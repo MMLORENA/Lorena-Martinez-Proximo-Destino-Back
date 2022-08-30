@@ -22,6 +22,5 @@ export const generalError = (
 
 export const notFoundEndpoint = (req: Request, res: Response) => {
   debug(chalk.bgRed("Request to endpoint not found"));
-
   res.status(404).json({ error: "Endpoint not found" });
 };
