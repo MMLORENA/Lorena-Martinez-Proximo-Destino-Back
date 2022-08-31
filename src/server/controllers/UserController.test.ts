@@ -37,7 +37,8 @@ describe("Given a getRegister", () => {
         expect(res.status).toHaveBeenCalledWith(status);
       });
 
-      test("Then it should invoke the response method json with a new User", async () => {
+      test("Then it should invoke the response method json with message 'User Created' ", async () => {
+        const expectedMessage = "User Created";
         const next = () => {};
 
         await getRegister(
@@ -46,7 +47,7 @@ describe("Given a getRegister", () => {
           next as NextFunction
         );
 
-        expect(res.json).toHaveBeenCalledWith({ user: mockUser });
+        expect(res.json).toHaveBeenCalledWith({ message: expectedMessage });
       });
     });
 
