@@ -8,7 +8,7 @@ import { UserRegister } from "../../interfaces/interfaces";
 let mongoServer: MongoMemoryServer;
 
 beforeAll(async () => {
-  mongoServer = await MongoMemoryServer.create(); // devuelve un servidor
+  mongoServer = await MongoMemoryServer.create();
   const mongoURL = mongoServer.getUri();
 
   await connectDB(mongoURL);
