@@ -15,6 +15,7 @@ const getRegister = async (req: Request, res: Response, next: NextFunction) => {
   try {
     user.password = await createHash(user.password);
     await User.create(user);
+
     res.status(201).json({ message: "User Created" });
 
     debug(chalk.green("Created newUser"));
