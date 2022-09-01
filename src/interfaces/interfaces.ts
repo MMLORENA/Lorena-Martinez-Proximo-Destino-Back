@@ -4,5 +4,6 @@ export interface UserRegister {
   secondName?: string;
   userName: string;
   password: string;
+  repeatedPassword: string;
   destinations?: [{}];
 }
