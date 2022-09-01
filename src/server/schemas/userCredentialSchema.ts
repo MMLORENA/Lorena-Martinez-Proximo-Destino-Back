@@ -4,11 +4,11 @@ const userCredentialSchema = {
   body: Joi.object({
     name: Joi.string().required(),
     firstName: Joi.string().required(),
-    secondName: Joi.string(),
-    userName: Joi.string().min(5).required(),
+    secondName: Joi.any().allow(null, ""),
+    userName: Joi.string().required(),
     destinations: Joi.array(),
-    password: Joi.string().min(4).required(),
-    repeatedPassword: Joi.string(),
+    password: Joi.string().required(),
+    repeatedPassword: Joi.string().required().valid(Joi.ref("password")),
   }),
 };
 

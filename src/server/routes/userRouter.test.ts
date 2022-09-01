@@ -30,6 +30,7 @@ describe("Given the endpoint POST /user/register", () => {
         firstName: "Zas",
         userName: "MarZas",
         password: "12345",
+        repeatedPassword: "12345",
       };
       const { body } = await request(app)
         .post(register)
