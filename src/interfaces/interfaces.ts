@@ -7,3 +7,7 @@ export interface UserRegister {
   repeatedPassword: string;
   destinations?: [{}];
 }
+export interface CustomJwtPayload {
+  id: string;
+  userName: string;
+}
