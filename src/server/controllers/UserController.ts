@@ -2,10 +2,15 @@ import "../../loadEnvironment";
 import Debug from "debug";
 import chalk from "chalk";
 import { NextFunction, Request, Response } from "express";
-import { UserLogin, UserRegister } from "../../interfaces/interfaces";
+import {
+  CustomJwtPayload,
+  UserDB,
+  UserLogin,
+  UserRegister,
+} from "../../interfaces/interfaces";
 import User from "../../database/models/User";
 import ErrorCustom from "../../utils/Error/ErrorCustom";
-import { createHash, hashCompare } from "../../utils/auth/auth";
+import { createHash, createToken, hashCompare } from "../../utils/auth/auth";
 
 const debug = Debug("destinos:server:controllers:usersControllers");
 
@@ -46,7 +51,7 @@ export const userLogin = async (
     "User or password not valid"
   );
 
-  let findUser: UserLogin;
+  let findUser: UserDB;
 
   try {
     findUser = await User.findOne({ userName: user.userName });
@@ -80,5 +85,19 @@ export const userLogin = async (
       "User or password not valid "
     );
     next(passwordError);
+    return;
   }
+
+  const payLoad: CustomJwtPayload = {
+    id: findUser.id,
+    userName: findUser.userName,
+  };
+
+  const responseData = {
+    user: {
+      token: createToken(payLoad),
+    },
+  };
+
+  res.status(200).json(responseData);
 };

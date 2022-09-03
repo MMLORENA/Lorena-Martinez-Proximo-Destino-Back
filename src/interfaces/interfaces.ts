@@ -8,12 +8,15 @@ export interface UserRegister {
 }
 
 export interface UserLogin {
-  id: string;
   userName: string;
   password: string;
-  destinations?: [{}];
 }
 export interface CustomJwtPayload {
   id: string;
   userName: string;
+}
+
+export interface UserDB extends UserLogin {
+  id: string;
+  destinations?: [{}];
 }

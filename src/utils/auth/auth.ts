@@ -1,6 +1,6 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { CustomJwtPayload } from "../interfaces/interfaces";
+import { CustomJwtPayload } from "../../interfaces/interfaces";
 
 const secret = process.env.SECRET;
 
