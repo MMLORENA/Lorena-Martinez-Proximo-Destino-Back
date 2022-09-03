@@ -5,9 +5,18 @@ export interface UserRegister {
   userName: string;
   password: string;
   repeatedPassword: string;
-  destinations?: [{}];
+}
+
+export interface UserLogin {
+  userName: string;
+  password: string;
 }
 export interface CustomJwtPayload {
   id: string;
   userName: string;
+}
+
+export interface UserDB extends UserLogin {
+  id: string;
+  destinations?: [{}];
 }
