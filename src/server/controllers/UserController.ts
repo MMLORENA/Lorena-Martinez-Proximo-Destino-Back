@@ -2,14 +2,18 @@ import "../../loadEnvironment";
 import Debug from "debug";
 import chalk from "chalk";
 import { NextFunction, Request, Response } from "express";
-import { UserRegister } from "../../interfaces/interfaces";
+import { UserLogin, UserRegister } from "../../interfaces/interfaces";
 import User from "../../database/models/User";
-import ErrorCustom from "../../utils/ErrorCustom";
-import { createHash } from "../../utils/auth";
+import ErrorCustom from "../../utils/Error/ErrorCustom";
+import { createHash, hashCompare } from "../../utils/auth/auth";
 
 const debug = Debug("destinos:server:controllers:usersControllers");
 
-const getRegister = async (req: Request, res: Response, next: NextFunction) => {
+export const getRegister = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   const user: UserRegister = req.body;
 
   try {
@@ -30,4 +34,51 @@ const getRegister = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-export default getRegister;
+export const userLogin = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const user: UserLogin = req.body;
+  const userError = new ErrorCustom(
+    403,
+    "User not found",
+    "User or password not valid"
+  );
+
+  let findUser: UserLogin;
+
+  try {
+    findUser = await User.findOne({ userName: user.userName });
+
+    if (!findUser) {
+      next(userError);
+      return;
+    }
+  } catch (error) {
+    const searchError = new ErrorCustom(
+      403,
+      (error as Error).message,
+      "User or password invalid"
+    );
+    next(searchError);
+    return;
+  }
+
+  try {
+    const isPasswordValid = await hashCompare(user.password, findUser.password);
+
+    if (!isPasswordValid) {
+      userError.privateMessage = "Password invalid";
+      next(userError);
+      return;
+    }
+  } catch (error) {
+    const passwordError = new ErrorCustom(
+      403,
+      (error as Error).message,
+      "User or password not valid "
+    );
+    next(passwordError);
+  }
+};

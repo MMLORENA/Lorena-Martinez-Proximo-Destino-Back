@@ -2,7 +2,7 @@ import "../loadEnvironment";
 import Debug from "debug";
 import chalk from "chalk";
 import app from ".";
-import ErrorCustom from "../utils/ErrorCustom";
+import ErrorCustom from "../utils/Error/ErrorCustom";
 
 const debug = Debug("destinos:server:startServer");
 

@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import User from "../../database/models/User";
-import ErrorCustom from "../../utils/ErrorCustom";
-import getRegister from "./UserController";
+import ErrorCustom from "../../utils/Error/ErrorCustom";
+import { getRegister } from "./UserController";
 
 const mockUser = {
   name: "Maria",

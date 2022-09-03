@@ -2,7 +2,7 @@ import "../loadEnvironment";
 import Debug from "debug";
 import chalk from "chalk";
 import mongoose from "mongoose";
-import ErrorCustom from "../utils/ErrorCustom";
+import ErrorCustom from "../utils/Error/ErrorCustom";
 
 const debug = Debug("destinos:database:index");
 

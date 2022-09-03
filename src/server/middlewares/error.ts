@@ -3,7 +3,7 @@ import chalk from "chalk";
 import Debug from "debug";
 import { NextFunction, Request, Response } from "express";
 import { ValidationError } from "express-validation";
-import ErrorCustom from "../../utils/ErrorCustom";
+import ErrorCustom from "../../utils/Error/ErrorCustom";
 
 const debug = Debug("destinos:server:controllers:usersControllers");
 
