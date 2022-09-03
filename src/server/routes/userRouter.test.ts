@@ -61,22 +61,19 @@ describe("Given the endpoint POST /user/register", () => {
 });
 
 describe("Given the endpoint POST /user/login", () => {
-  beforeEach(async () => {
-    const mockNewUser: UserRegister = {
-      name: "Admin",
-      firstName: "Admin",
-      userName: "Admin",
-      password: "12345",
-      repeatedPassword: "12345",
-    };
-
-    await request(app).post("/user/register").send(mockNewUser);
-  });
-
   const login = "/user/login";
 
   describe("When it receives a request with userName 'Admin'and password 'Admin'", () => {
     test("Then it should response with status '200' and a user with a token", async () => {
+      const mockNewUser: UserRegister = {
+        name: "Admin",
+        firstName: "Admin",
+        userName: "Admin",
+        password: "12345",
+        repeatedPassword: "12345",
+      };
+
+      await request(app).post("/user/register").send(mockNewUser);
       const mockUser: UserLogin = {
         userName: "Admin",
         password: "12345",
