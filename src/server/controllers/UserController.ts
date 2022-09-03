@@ -5,7 +5,7 @@ import { NextFunction, Request, Response } from "express";
 import { UserRegister } from "../../interfaces/interfaces";
 import User from "../../database/models/User";
 import ErrorCustom from "../../utils/ErrorCustom";
-import createHash from "../../utils/auth";
+import { createHash } from "../../utils/auth";
 
 const debug = Debug("destinos:server:controllers:usersControllers");
 
