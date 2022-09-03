@@ -3,7 +3,7 @@ import { MongoMemoryServer } from "mongodb-memory-server";
 import mongoose from "mongoose";
 import app from "..";
 import connectDB from "../../database";
-import { UserRegister } from "../../interfaces/interfaces";
+import { UserLogin, UserRegister } from "../../interfaces/interfaces";
 
 let mongoServer: MongoMemoryServer;
 
@@ -54,6 +54,47 @@ describe("Given the endpoint POST /user/register", () => {
         .post(register)
         .send(mockUserWrong)
         .expect(400);
+
+      expect(body).toHaveProperty("error", message);
+    });
+  });
+});
+
+describe("Given the endpoint POST /user/login", () => {
+  const login = "/user/login";
+
+  describe("When it receives a request with userName 'Admin'and password 'Admin'", () => {
+    test("Then it should response with status '200' and a user with a token", async () => {
+      const mockNewUser: UserRegister = {
+        name: "Admin",
+        firstName: "Admin",
+        userName: "Admin",
+        password: "12345",
+        repeatedPassword: "12345",
+      };
+
+      await request(app).post("/user/register").send(mockNewUser);
+      const mockUser: UserLogin = {
+        userName: "Admin",
+        password: "12345",
+      };
+
+      await request(app).post(login).send(mockUser).expect(200);
+    });
+  });
+
+  describe("When it receives a request without password", () => {
+    test("Then it should respond with status 403 and a message User or password not valid'", async () => {
+      const message = "User or password not valid";
+      const mockUserWrong = {
+        userName: "Admin",
+        password: "Ad",
+      };
+
+      const { body } = await request(app)
+        .post(login)
+        .send(mockUserWrong)
+        .expect(403);
 
       expect(body).toHaveProperty("error", message);
     });
