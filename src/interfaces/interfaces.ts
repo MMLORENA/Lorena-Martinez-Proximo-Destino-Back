@@ -13,7 +13,6 @@ export interface UserLogin {
   password: string;
   destinations?: [{}];
 }
-
 export interface CustomJwtPayload {
   id: string;
   userName: string;
