@@ -30,7 +30,7 @@ export const getRegister = async (
     debug(chalk.green("Created newUser"));
   } catch (error) {
     const customError = new ErrorCustom(
-      400,
+      409,
       error.message,
       "Error creating new user"
     );
@@ -46,7 +46,7 @@ export const userLogin = async (
 ) => {
   const user: UserLogin = req.body;
   const userError = new ErrorCustom(
-    403,
+    401,
     "User not found",
     "User or password not valid"
   );

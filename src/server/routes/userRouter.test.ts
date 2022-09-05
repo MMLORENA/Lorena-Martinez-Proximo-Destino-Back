@@ -84,7 +84,7 @@ describe("Given the endpoint POST /user/login", () => {
   });
 
   describe("When it receives a request without password", () => {
-    test("Then it should respond with status 403 and a message User or password not valid'", async () => {
+    test("Then it should respond with status 401 and a message User or password not valid'", async () => {
       const message = "User or password not valid";
       const mockUserWrong = {
         userName: "Admin",
@@ -94,7 +94,7 @@ describe("Given the endpoint POST /user/login", () => {
       const { body } = await request(app)
         .post(login)
         .send(mockUserWrong)
-        .expect(403);
+        .expect(401);
 
       expect(body).toHaveProperty("error", message);
     });

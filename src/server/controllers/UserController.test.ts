@@ -133,7 +133,7 @@ describe("Given a userLogin", () => {
       test("Then it should invoke the method next with an error", async () => {
         const mockUserNotFound: null = null;
         const mockError = new ErrorCustom(
-          403,
+          401,
           "User not found",
           "User or password not valid"
         );
@@ -148,7 +148,7 @@ describe("Given a userLogin", () => {
     describe("And it's receives correctly the user data but there is a Database error during the search", () => {
       test("Then call the response method next with an error", async () => {
         const mockMongooseReject = new Error();
-        const mockUserError = new ErrorCustom(403, "", "");
+        const mockUserError = new ErrorCustom(401, "", "");
 
         User.findOne = jest.fn().mockRejectedValue(mockMongooseReject);
         await userLogin(req as Request, res as Response, next as NextFunction);
@@ -159,7 +159,7 @@ describe("Given a userLogin", () => {
 
     describe("And it's receives correctly the user data but the password comparer fails", () => {
       test("Then it should invoke next method with an error", async () => {
-        const mockPasswordError = new ErrorCustom(403, "", "");
+        const mockPasswordError = new ErrorCustom(401, "", "");
         const bcryptResolve = false;
 
         User.findOne = jest.fn().mockResolvedValue(mockUserFound);
@@ -172,7 +172,7 @@ describe("Given a userLogin", () => {
 
     describe("But password comparer throw an error", () => {
       test("Then call the response method next with an error", async () => {
-        const hashError = new ErrorCustom(403, "", "");
+        const hashError = new ErrorCustom(401, "", "");
         const bcryptError = new Error();
 
         User.findOne = jest.fn().mockResolvedValue(mockUserFound);
