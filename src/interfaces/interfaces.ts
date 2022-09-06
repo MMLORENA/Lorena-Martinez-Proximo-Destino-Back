@@ -1,3 +1,6 @@
+import { Request } from "express";
+import { JwtPayload } from "jsonwebtoken";
+
 export interface UserRegister {
   name: string;
   firstName: string;
@@ -19,4 +22,8 @@ export interface CustomJwtPayload {
 export interface UserDB extends UserLogin {
   id: string;
   destinations?: [{}];
+}
+
+export interface CustomRequest extends Request {
+  payload: JwtPayload;
 }
