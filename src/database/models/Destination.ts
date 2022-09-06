@@ -1,7 +1,7 @@
 import { model, Schema } from "mongoose";
 
 const DestinationSchema = new Schema({
-  destino: {
+  destination: {
     type: String,
     required: true,
     unique: true,
@@ -48,6 +48,6 @@ const DestinationSchema = new Schema({
   },
 });
 
-const Destination = model("Destination", DestinationSchema, "destinos");
+const Destination = model("Destination", DestinationSchema, "destinations");
 
 export default Destination;
