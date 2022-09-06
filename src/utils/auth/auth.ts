@@ -14,3 +14,6 @@ export const hashCompare = (passwordText: string, hash: string) =>
 
 export const createToken = (payload: CustomJwtPayload) =>
   jwt.sign(payload, secret);
+
+export const verifyToken = (token: string) =>
+  jwt.verify(token, process.env.SECRET);
