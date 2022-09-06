@@ -3,6 +3,7 @@ import morgan from "morgan";
 import cors from "cors";
 import { generalError, notFoundEndpoint } from "./middlewares/error";
 import userRouter from "./routes/userRouter";
+import destinationsRouter from "./routes/destinationsRouter.ts/destinationsRouter";
 
 const app = express();
 app.disable("x-powered-by");
@@ -12,6 +13,7 @@ app.use(morgan("dev"));
 app.use(express.json());
 
 app.use("/user", userRouter);
+app.use("/destinations", destinationsRouter);
 
 app.use(notFoundEndpoint);
 app.use(generalError);
