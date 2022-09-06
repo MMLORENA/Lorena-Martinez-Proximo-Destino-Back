@@ -1,6 +1,9 @@
 import express from "express";
 import { validate } from "express-validation";
-import { getRegister, userLogin } from "../controllers/UserController";
+import {
+  getRegister,
+  userLogin,
+} from "../controllers/UserController/UserController";
 import loginCredentialSchema from "../schemas/loginCredentialSchema";
 import userCredentialSchema from "../schemas/userCredentialSchema";
 

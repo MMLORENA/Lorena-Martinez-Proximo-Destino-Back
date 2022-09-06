@@ -61,6 +61,14 @@
         }
       },
       "response": []
+    },
+    {
+      "name": "userDestinations",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": []
     }
   ],
   "event": [
