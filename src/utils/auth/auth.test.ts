@@ -5,6 +5,7 @@ import { createHash, createToken, hashCompare, verifyToken } from "./auth";
 
 describe("Given the createHash function", () => {
   afterAll(() => jest.clearAllMocks());
+
   describe("When it's called with '123' ", () => {
     test("Then it should return '#", async () => {
       bcrypt.hash = jest.fn().mockResolvedValue("#");
