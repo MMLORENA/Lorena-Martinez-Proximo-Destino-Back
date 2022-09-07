@@ -1,10 +1,10 @@
 import express from "express";
 
 import getUserDestinations from "../../controllers/DestinationController/DestinationController";
-import userAuthentification from "../../middlewares/userAuthentification";
+import userAuthentication from "../../middlewares/userAuthentication";
 
 const destinationsRouter = express.Router();
 
-destinationsRouter.get("/", userAuthentification, getUserDestinations);
+destinationsRouter.get("/", userAuthentication, getUserDestinations);
 
 export default destinationsRouter;

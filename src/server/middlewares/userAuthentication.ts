@@ -3,7 +3,7 @@ import { CustomRequest } from "../../interfaces/interfaces";
 import { verifyToken } from "../../utils/auth/auth";
 import ErrorCustom from "../../utils/Error/ErrorCustom";
 
-const userAuthentification = (
+const userAuthentication = (
   req: CustomRequest,
   res: Response,
   next: NextFunction
@@ -36,4 +36,4 @@ const userAuthentification = (
   next();
 };
 
-export default userAuthentification;
+export default userAuthentication;
