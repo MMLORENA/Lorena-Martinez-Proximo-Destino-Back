@@ -3,11 +3,11 @@ import Debug from "debug";
 import chalk from "chalk";
 import { NextFunction, Request, Response } from "express";
 import {
-  CustomJwtPayload,
   UserDB,
   UserLogin,
   UserRegister,
-} from "../../../interfaces/interfaces";
+} from "../../../interfaces/interfacesUser/interfacesUser";
+import { CustomJwtPayload } from "../../../interfaces/interfaces";
 import User from "../../../database/models/User";
 import ErrorCustom from "../../../utils/Error/ErrorCustom";
 import { createHash, createToken, hashCompare } from "../../../utils/auth/auth";

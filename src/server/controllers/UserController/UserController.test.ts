@@ -2,7 +2,10 @@ import { NextFunction, Request, Response } from "express";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import User from "../../../database/models/User";
-import { UserDB, UserLogin } from "../../../interfaces/interfaces";
+import {
+  UserDB,
+  UserLogin,
+} from "../../../interfaces/interfacesUser/interfacesUser";
 import ErrorCustom from "../../../utils/Error/ErrorCustom";
 import { getRegister, userLogin } from "./UserController";
 

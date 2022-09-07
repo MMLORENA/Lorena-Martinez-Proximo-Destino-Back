@@ -3,7 +3,10 @@ import { MongoMemoryServer } from "mongodb-memory-server";
 import mongoose from "mongoose";
 import app from "../..";
 import connectDB from "../../../database";
-import { UserLogin, UserRegister } from "../../../interfaces/interfaces";
+import {
+  UserLogin,
+  UserRegister,
+} from "../../../interfaces/interfacesUser/interfacesUser";
 
 let mongoServer: MongoMemoryServer;
 

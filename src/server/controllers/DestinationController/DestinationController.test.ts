@@ -1,6 +1,6 @@
 import { NextFunction, Response } from "express";
 import User from "../../../database/models/User";
-import { Destinations } from "../../../interfaces/DestinationsInterfaces/interfacesDestination";
+import { Destinations } from "../../../interfaces/interfacesDestinations/interfacesDestination";
 import {
   CustomJwtPayload,
   CustomRequest,
