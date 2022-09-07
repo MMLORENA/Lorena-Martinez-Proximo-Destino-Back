@@ -3,9 +3,9 @@ import { validate } from "express-validation";
 import {
   getRegister,
   userLogin,
-} from "../controllers/UserController/UserController";
-import loginCredentialSchema from "../schemas/loginCredentialSchema";
-import userCredentialSchema from "../schemas/userCredentialSchema";
+} from "../../controllers/UserController/UserController";
+import loginCredentialSchema from "../../schemas/loginCredentialSchema";
+import userCredentialSchema from "../../schemas/userCredentialSchema";
 
 const userRouter = express.Router();
 

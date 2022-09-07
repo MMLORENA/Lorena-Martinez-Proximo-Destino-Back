@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
-import ErrorCustom from "../../utils/Error/ErrorCustom";
-import TestCustomValidationError from "../../utils/Error/TestCustomValidationError";
+import ErrorCustom from "../../../utils/Error/ErrorCustom";
+import TestCustomValidationError from "../../../utils/Error/TestCustomValidationError";
 import { generalError, notFoundEndpoint } from "./error";
 
 describe("Given a generalError middleware", () => {

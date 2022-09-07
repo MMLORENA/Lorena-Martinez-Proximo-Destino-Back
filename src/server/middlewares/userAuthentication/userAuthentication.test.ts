@@ -1,12 +1,12 @@
 import { NextFunction, Response } from "express";
-import { CustomRequest } from "../../interfaces/interfaces";
-import ErrorCustom from "../../utils/Error/ErrorCustom";
-import userAuthentification from "./userAuthentification";
+import { CustomRequest } from "../../../interfaces/interfaces";
+import ErrorCustom from "../../../utils/Error/ErrorCustom";
+import userAuthentication from "./userAuthentication";
 
 const mockVerifyToken = jest.fn();
 
-jest.mock("../../utils/auth/auth", () => ({
-  ...jest.requireActual("../../utils/auth/auth"),
+jest.mock("../../../utils/auth/auth", () => ({
+  ...jest.requireActual("../../../utils/auth/auth"),
   verifyToken: (token: string) => mockVerifyToken(token),
 }));
 
@@ -23,7 +23,7 @@ describe("Given an userAuthentificationvmiddleware", () => {
 
         const next = jest.fn() as NextFunction;
 
-        userAuthentification(
+        userAuthentication(
           req as CustomRequest,
           res as Response,
           next as NextFunction
@@ -50,7 +50,7 @@ describe("Given an userAuthentificationvmiddleware", () => {
           "Error of authentication"
         );
 
-        userAuthentification(
+        userAuthentication(
           req as CustomRequest,
           res as Response,
           next as NextFunction
@@ -76,7 +76,7 @@ describe("Given an userAuthentificationvmiddleware", () => {
           "Error of authentication"
         );
 
-        userAuthentification(
+        userAuthentication(
           req as CustomRequest,
           res as Response,
           next as NextFunction
@@ -104,7 +104,7 @@ describe("Given an userAuthentificationvmiddleware", () => {
           "Error of authentication"
         );
 
-        userAuthentification(
+        userAuthentication(
           req as CustomRequest,
           res as Response,
           next as NextFunction
