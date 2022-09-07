@@ -1,7 +1,7 @@
 import { NextFunction, Response } from "express";
-import { CustomRequest } from "../../interfaces/interfaces";
-import { verifyToken } from "../../utils/auth/auth";
-import ErrorCustom from "../../utils/Error/ErrorCustom";
+import { CustomRequest } from "../../../interfaces/interfaces";
+import { verifyToken } from "../../../utils/auth/auth";
+import ErrorCustom from "../../../utils/Error/ErrorCustom";
 
 const userAuthentication = (
   req: CustomRequest,

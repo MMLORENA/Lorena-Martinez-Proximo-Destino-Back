@@ -1,6 +1,6 @@
 import { NextFunction, Response } from "express";
-import { CustomRequest } from "../../interfaces/interfaces";
-import ErrorCustom from "../../utils/Error/ErrorCustom";
+import { CustomRequest } from "../../../interfaces/interfaces";
+import ErrorCustom from "../../../utils/Error/ErrorCustom";
 import userAuthentication from "./userAuthentication";
 
 const mockVerifyToken = jest.fn();

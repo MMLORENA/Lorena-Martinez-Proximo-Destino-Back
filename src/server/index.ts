@@ -1,8 +1,8 @@
 import express from "express";
 import morgan from "morgan";
 import cors from "cors";
-import { generalError, notFoundEndpoint } from "./middlewares/error";
-import userRouter from "./routes/userRouter";
+import { generalError, notFoundEndpoint } from "./middlewares/error/error";
+import userRouter from "./routes/userRouter/userRouter";
 import destinationsRouter from "./routes/destinationsRouter.ts/destinationsRouter";
 
 const app = express();
