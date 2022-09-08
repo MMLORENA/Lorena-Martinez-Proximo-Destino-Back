@@ -1,11 +1,9 @@
 import { NextFunction, Response } from "express";
 import User from "../../../database/models/User";
-import { Destinations } from "../../../interfaces/interfacesDestinations/interfacesDestination";
 import {
   CustomJwtPayload,
   CustomRequest,
 } from "../../../interfaces/interfaces";
-import ErrorCustom from "../../../utils/Error/ErrorCustom";
 import getUserDestinations from "./DestinationController";
 
 describe("Given a getUserDestination", () => {
@@ -117,36 +115,6 @@ describe("Given a getUserDestination", () => {
         );
 
         expect(next).toHaveBeenCalled();
-      });
-    });
-
-    describe("And the user is on DB but hasn't destinations", () => {
-      test("Then it should invoke next methode with Error and status '404'", async () => {
-        const mockUserPopulate = {
-          name: "Admin",
-          firstName: "Admin",
-          userName: "Admin",
-          password:
-            "$2a$10$daP7dm2Ec4RoPvkmfIwLuOYOp1.tjAM99OQvYFkShXKRqF/7ogg9W",
-          destinations: [] as Destinations,
-        };
-
-        const mockError = new ErrorCustom(
-          401,
-          "There isn't destinations availability",
-          "Destinations not found"
-        );
-
-        User.findOne = jest.fn().mockReturnThis();
-        User.populate = jest.fn().mockReturnValue(mockUserPopulate);
-
-        await getUserDestinations(
-          req as CustomRequest,
-          res as Response,
-          next as NextFunction
-        );
-
-        expect(next).toHaveBeenCalledWith(mockError);
       });
     });
   });
