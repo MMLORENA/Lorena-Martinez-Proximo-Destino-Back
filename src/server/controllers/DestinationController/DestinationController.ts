@@ -22,16 +22,6 @@ const getUserDestinations = async (
       model: Destination,
     });
 
-    if (destinations.length === 0) {
-      const errorDestinations = new ErrorCustom(
-        404,
-        "There isn't destinations availability",
-        "Destinations not found"
-      );
-      next(errorDestinations);
-      return;
-    }
-
     res.status(200).json({ destinations });
     debug(chalk.green("Request user destinations"));
   } catch (error) {

@@ -11,7 +11,7 @@ const userAuthentication = (
   const customError = new ErrorCustom(
     400,
     "Bad request",
-    "User sends bad login"
+    "UserName or Password wrong"
   );
 
   const requestAuthentification = req.get("Authorization");
