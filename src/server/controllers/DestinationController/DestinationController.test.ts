@@ -5,7 +5,9 @@ import {
   CustomJwtPayload,
   CustomRequest,
 } from "../../../interfaces/interfaces";
+import ErrorCustom from "../../../utils/Error/ErrorCustom";
 import {
+  createDestination,
   deleteDestination,
   getUserDestinations,
 } from "./DestinationController";
@@ -190,6 +192,95 @@ describe("Given a deleteDestination", () => {
         );
 
         expect(next).toHaveBeenCalledWith(ErrorCustom);
+      });
+    });
+  });
+});
+
+describe("Given a createDestination", () => {
+  describe("When it's called with a request a next function", () => {
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+    } as Partial<Response>;
+
+    const next = jest.fn() as NextFunction;
+
+    describe("And a response with correct id", () => {
+      const bodyDestination = {
+        destination: "Nepal",
+        image: "A",
+        backupImage: "A",
+        latitude: 200,
+        longitud: 1000,
+        category: "adventure",
+        firstPlan: "Himalaya",
+        descriptionFirstPlan: "trekking",
+        id: "a",
+      };
+
+      const req: Partial<CustomRequest> = {
+        body: bodyDestination,
+        payload: mockPayloadUser,
+      };
+
+      test("Then it should call the response method status with 200", async () => {
+        const status = 201;
+
+        User.findOneAndUpdate = jest.fn();
+        Destination.create = jest.fn();
+
+        await createDestination(
+          req as CustomRequest,
+          res as Response,
+          next as NextFunction
+        );
+
+        expect(res.status).toHaveBeenCalledWith(status);
+      });
+
+      test("Then it should call the response method json with message", async () => {
+        const expectedJson = { message: "New Destination created succesfully" };
+
+        User.findOneAndUpdate = jest.fn();
+        Destination.create = jest.fn();
+
+        await createDestination(
+          req as CustomRequest,
+          res as Response,
+          next as NextFunction
+        );
+
+        expect(res.json).toHaveBeenCalledWith(expectedJson);
+      });
+    });
+
+    describe("When it's invoke with an empty idDestination", () => {
+      test("Then it should call next function with an error", async () => {
+        const bodyDestination = {};
+
+        const req: Partial<CustomRequest> = {
+          body: bodyDestination,
+          payload: mockPayloadUser,
+        };
+        const ErrorCustomTest = new ErrorCustom(
+          400,
+          "",
+          "Error creating new destination"
+        );
+
+        Destination.findByIdAndDelete = jest
+          .fn()
+          .mockRejectedValue(new Error());
+        User.findOneAndUpdate = jest.fn().mockRejectedValue(new Error());
+
+        await createDestination(
+          req as CustomRequest,
+          res as Response,
+          next as NextFunction
+        );
+
+        expect(next).toHaveBeenCalledWith(ErrorCustomTest);
       });
     });
   });

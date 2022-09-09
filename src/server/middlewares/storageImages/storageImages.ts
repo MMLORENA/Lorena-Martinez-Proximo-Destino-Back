@@ -3,7 +3,7 @@ import fs from "fs/promises";
 import path from "path";
 import { CustomRequest } from "../../../interfaces/interfaces";
 import ErrorCustom from "../../../utils/Error/ErrorCustom";
-import superbase from "./superBaseClient";
+import supabase from "./supaBaseClient";
 
 const storageImages = async (
   req: CustomRequest,
@@ -11,7 +11,7 @@ const storageImages = async (
   next: NextFunction
 ) => {
   const { file } = req;
-  const storage = superbase.storage.from("mmlore-final-project");
+  const storage = supabase.storage.from("mmlore-final-project");
 
   const newImageName = `${Date.now()}-${file.originalname}`;
 

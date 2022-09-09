@@ -1,9 +1,9 @@
 import "../../../loadEnvironment";
 import { createClient } from "@supabase/supabase-js";
 
-const superbase = createClient(
+const supabase = createClient(
   process.env.SUPABASE_URL,
   process.env.SUPABASE_KEY
 );
 
-export default superbase;
+export default supabase;
