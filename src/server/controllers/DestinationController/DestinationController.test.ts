@@ -1,20 +1,24 @@
 import { NextFunction, Response } from "express";
+import Destination from "../../../database/models/Destination";
 import User from "../../../database/models/User";
 import {
   CustomJwtPayload,
   CustomRequest,
 } from "../../../interfaces/interfaces";
-import { getUserDestinations } from "./DestinationController";
+import {
+  deleteDestination,
+  getUserDestinations,
+} from "./DestinationController";
+
+const mockPayloadUser: CustomJwtPayload = {
+  id: "63175d13ef184c29a92d2e67",
+  userName: "Admin",
+};
 
 describe("Given a getUserDestination", () => {
   afterEach(() => jest.clearAllMocks());
 
   describe("When it's called with a request, response and a next function", () => {
-    const mockPayloadUser: CustomJwtPayload = {
-      id: "63175d13ef184c29a92d2e67",
-      userName: "Admin",
-    };
-
     const req = {
       payload: mockPayloadUser,
     } as Partial<CustomRequest>;
@@ -115,6 +119,77 @@ describe("Given a getUserDestination", () => {
         );
 
         expect(next).toHaveBeenCalled();
+      });
+    });
+  });
+});
+
+describe("Given a deleteDestination", () => {
+  describe("When it's called with a request a next function", () => {
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+    } as Partial<Response>;
+
+    const next = jest.fn() as NextFunction;
+
+    describe("And a response with correct id", () => {
+      const req: Partial<CustomRequest> = {
+        params: { idDestination: "1" },
+        payload: mockPayloadUser,
+      };
+
+      test("Then it should call the response method status with 200", async () => {
+        const status = 200;
+
+        Destination.findByIdAndDelete = jest.fn();
+        User.findOneAndUpdate = jest.fn();
+
+        await deleteDestination(
+          req as CustomRequest,
+          res as Response,
+          next as NextFunction
+        );
+
+        expect(res.status).toHaveBeenCalledWith(status);
+      });
+
+      test("Then it should call the response method json with message", async () => {
+        const expectedJson = { message: "Destination has been deleted" };
+
+        Destination.findByIdAndDelete = jest.fn();
+        User.findOneAndUpdate = jest.fn();
+
+        await deleteDestination(
+          req as CustomRequest,
+          res as Response,
+          next as NextFunction
+        );
+
+        expect(res.json).toHaveBeenCalledWith(expectedJson);
+      });
+    });
+
+    describe("And it receives a response with an id Destination doesn't exist", () => {
+      test("Then it should call next function with an error", async () => {
+        const req: Partial<CustomRequest> = {
+          params: { idDestination: "" },
+          payload: mockPayloadUser,
+        };
+        const ErrorCustom = new Error();
+
+        Destination.findByIdAndDelete = jest
+          .fn()
+          .mockRejectedValue(new Error());
+        User.findOneAndUpdate = jest.fn();
+
+        await deleteDestination(
+          req as CustomRequest,
+          res as Response,
+          next as NextFunction
+        );
+
+        expect(next).toHaveBeenCalledWith(ErrorCustom);
       });
     });
   });

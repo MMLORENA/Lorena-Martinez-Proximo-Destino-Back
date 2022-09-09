@@ -1,7 +1,7 @@
 import "../../../loadEnvironment";
 import Debug from "debug";
 import chalk from "chalk";
-import { NextFunction, Request, Response } from "express";
+import { NextFunction, Response } from "express";
 import User from "../../../database/models/User";
 import ErrorCustom from "../../../utils/Error/ErrorCustom";
 import { CustomRequest } from "../../../interfaces/interfaces";
@@ -34,17 +34,23 @@ export const getUserDestinations = async (
   }
 };
 
-export const deleteDestinations = async (
-  req: Request,
+export const deleteDestination = async (
+  req: CustomRequest,
   res: Response,
   next: NextFunction
 ) => {
   const { idDestination } = req.params;
+  const { id } = req.payload;
 
   try {
-    await Destination.findById({ _id: idDestination });
-    await Destination.deleteOne({ _id: idDestination });
+    await Destination.findByIdAndDelete({ _id: idDestination });
 
+    await User.findOneAndUpdate(
+      { _id: id },
+      {
+        $pull: { destinations: idDestination },
+      }
+    );
     res.status(200).json({ message: "Destination has been deleted" });
   } catch (error) {
     const customError = new ErrorCustom(
