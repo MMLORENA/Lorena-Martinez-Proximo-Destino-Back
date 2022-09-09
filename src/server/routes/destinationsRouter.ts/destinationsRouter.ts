@@ -10,7 +10,7 @@ const destinationsRouter = express.Router();
 
 destinationsRouter.get("/", userAuthentication, getUserDestinations);
 destinationsRouter.delete(
-  "/:idDestination",
+  "/delete/:idDestination",
   userAuthentication,
   deleteDestination
 );
