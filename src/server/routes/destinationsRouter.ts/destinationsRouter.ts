@@ -1,6 +1,7 @@
 import express from "express";
 
 import {
+  createDestination,
   deleteDestination,
   getUserDestinations,
 } from "../../controllers/DestinationController/DestinationController";
@@ -14,5 +15,6 @@ destinationsRouter.delete(
   userAuthentication,
   deleteDestination
 );
+destinationsRouter.post("/create/", userAuthentication, createDestination);
 
 export default destinationsRouter;
