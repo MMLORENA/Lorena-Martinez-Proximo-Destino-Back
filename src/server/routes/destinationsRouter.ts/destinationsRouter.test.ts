@@ -36,9 +36,10 @@ beforeEach(async () => {
   const mockDestination = await Destination.create({
     destination: "Nepal",
     image: "A",
+    backupImage: "A",
     latitude: 200,
     longitud: 1000,
-    cateogry: "adventure",
+    category: "adventure",
     firstPlan: "Himalaya",
     descriptionFirstPlan: "trekking",
     owner: mockUser.id,

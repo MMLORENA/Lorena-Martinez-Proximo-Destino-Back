@@ -178,7 +178,7 @@ describe("Given a deleteDestination", () => {
           params: { idDestination: "" },
           payload: mockPayloadUser,
         };
-        const ErrorCustom = new Error();
+        const mockErrorCustom = new Error();
 
         Destination.findByIdAndDelete = jest
           .fn()
@@ -191,7 +191,7 @@ describe("Given a deleteDestination", () => {
           next as NextFunction
         );
 
-        expect(next).toHaveBeenCalledWith(ErrorCustom);
+        expect(next).toHaveBeenCalledWith(mockErrorCustom);
       });
     });
   });

@@ -3,7 +3,7 @@ import fs from "fs/promises";
 import path from "path";
 import { CustomRequest } from "../../../interfaces/interfaces";
 import ErrorCustom from "../../../utils/Error/ErrorCustom";
-import supabase from "./supaBaseClient";
+import supabase from "./supabase";
 
 const storageImages = async (
   req: CustomRequest,
@@ -21,7 +21,7 @@ const storageImages = async (
       path.join("uploads", newImageName)
     );
 
-    const readFile = await fs.readFile(path.join("uploads", newImageName));
+    const readFile = await fs.readFile(path.join("uploads/", newImageName));
 
     const resultUpload = await storage.upload(newImageName, readFile);
 
