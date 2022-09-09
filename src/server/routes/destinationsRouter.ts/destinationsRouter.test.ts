@@ -9,6 +9,7 @@ import { createToken } from "../../../utils/auth/auth";
 
 let mongoServer: MongoMemoryServer;
 let mockToken: string;
+let destinationsDelete: string;
 
 beforeAll(async () => {
   mongoServer = await MongoMemoryServer.create();
@@ -45,6 +46,8 @@ beforeEach(async () => {
 
   mockUser.destinations.push(mockDestination.id);
   mockUser.save();
+
+  destinationsDelete = `/destinations/${mockDestination.id}`;
 });
 
 afterEach(async () => {
@@ -80,6 +83,36 @@ describe("Given the endpoint GET /destinations/", () => {
 
       const { body } = await request(app)
         .get(destinations)
+        .set("Authorization", `Bearer #`)
+        .expect(expectedStatus);
+
+      expect(body).toHaveProperty("error", message);
+    });
+  });
+});
+
+describe("Given the endpoint DELETE /destinations/:idDestination", () => {
+  describe("When it receives a request with method delete and a valid user token", () => {
+    test("Then it should response with status 200 and an object with a property message 'Destination has been deleted'", async () => {
+      const expectedStatus = 200;
+      const expectedMessage = "Destination has been deleted";
+
+      const { body } = await request(app)
+        .delete(destinationsDelete)
+        .set("Authorization", `Bearer ${mockToken}`)
+        .expect(expectedStatus);
+
+      expect(body).toHaveProperty("message", expectedMessage);
+    });
+  });
+
+  describe("When it receives a request with method get and an ivalid user token", () => {
+    test("Then it should response with status 404 and an object with a property 'destinations'", async () => {
+      const expectedStatus = 500;
+      const message = "General error";
+
+      const { body } = await request(app)
+        .delete(destinationsDelete)
         .set("Authorization", `Bearer #`)
         .expect(expectedStatus);
 
