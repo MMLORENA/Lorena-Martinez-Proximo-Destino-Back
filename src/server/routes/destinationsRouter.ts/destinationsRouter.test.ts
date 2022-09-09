@@ -47,7 +47,7 @@ beforeEach(async () => {
   mockUser.destinations.push(mockDestination.id);
   mockUser.save();
 
-  destinationsDelete = `/destinations/${mockDestination.id}`;
+  destinationsDelete = `/destinations/delete/${mockDestination.id}`;
 });
 
 afterEach(async () => {
