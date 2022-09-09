@@ -1,6 +1,6 @@
 import express from "express";
 
-import getUserDestinations from "../../controllers/DestinationController/DestinationController";
+import {getUserDestinations} from "../../controllers/DestinationController/DestinationController";
 import userAuthentication from "../../middlewares/userAuthentication/userAuthentication";
 
 const destinationsRouter = express.Router();

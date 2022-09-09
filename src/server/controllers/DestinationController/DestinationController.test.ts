@@ -4,7 +4,7 @@ import {
   CustomJwtPayload,
   CustomRequest,
 } from "../../../interfaces/interfaces";
-import getUserDestinations from "./DestinationController";
+import { getUserDestinations } from "./DestinationController";
 
 describe("Given a getUserDestination", () => {
   afterEach(() => jest.clearAllMocks());
