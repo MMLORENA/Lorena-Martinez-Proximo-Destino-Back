@@ -10,6 +10,9 @@ const DestinationSchema = new Schema({
     type: String,
     required: true,
   },
+  backupImage: {
+    type: String,
+  },
   latitude: {
     type: Number,
     required: true,
@@ -18,7 +21,7 @@ const DestinationSchema = new Schema({
     type: Number,
     required: true,
   },
-  cateogry: {
+  category: {
     type: String,
     required: true,
   },
