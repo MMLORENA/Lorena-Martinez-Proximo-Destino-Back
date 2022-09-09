@@ -1,10 +1,18 @@
 import express from "express";
 
-import getUserDestinations from "../../controllers/DestinationController/DestinationController";
+import {
+  deleteDestination,
+  getUserDestinations,
+} from "../../controllers/DestinationController/DestinationController";
 import userAuthentication from "../../middlewares/userAuthentication/userAuthentication";
 
 const destinationsRouter = express.Router();
 
 destinationsRouter.get("/", userAuthentication, getUserDestinations);
+destinationsRouter.delete(
+  "/:idDestination",
+  userAuthentication,
+  deleteDestination
+);
 
 export default destinationsRouter;

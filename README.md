@@ -30,7 +30,7 @@
 
 ◾ **[DELETE]/destinations/delete/:idDestino**➡ elimina de la BD el destino por id y devuelve el objeto eliminado.
 
-    ✅ STATUS: 201
+    ✅ STATUS: 200
 
 # STATUS ERRORES:
 

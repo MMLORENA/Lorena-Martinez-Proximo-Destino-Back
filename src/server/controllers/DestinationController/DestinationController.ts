@@ -9,7 +9,7 @@ import Destination from "../../../database/models/Destination";
 
 const debug = Debug("destinos:server:controllers:usersDestinations");
 
-const getUserDestinations = async (
+export const getUserDestinations = async (
   req: CustomRequest,
   res: Response,
   next: NextFunction
@@ -34,4 +34,30 @@ const getUserDestinations = async (
   }
 };
 
-export default getUserDestinations;
+export const deleteDestination = async (
+  req: CustomRequest,
+  res: Response,
+  next: NextFunction
+) => {
+  const { idDestination } = req.params;
+  const { id } = req.payload;
+
+  try {
+    await Destination.findByIdAndDelete({ _id: idDestination });
+
+    await User.findOneAndUpdate(
+      { _id: id },
+      {
+        $pull: { destinations: idDestination },
+      }
+    );
+    res.status(200).json({ message: "Destination has been deleted" });
+  } catch (error) {
+    const customError = new ErrorCustom(
+      400,
+      error.message,
+      "Error deleting destination"
+    );
+    next(customError);
+  }
+};
