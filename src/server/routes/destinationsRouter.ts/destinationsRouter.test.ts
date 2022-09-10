@@ -11,6 +11,21 @@ let mongoServer: MongoMemoryServer;
 let mockToken: string;
 let destinationsDelete: string;
 
+jest.mock("@supabase/supabase-js", () => ({
+  createClient: () => ({
+    storage: {
+      from: () => ({
+        upload: jest.fn().mockReturnValue({
+          error: false,
+        }),
+        getPublicUrl: () => ({
+          publicURL: "Image url",
+        }),
+      }),
+    },
+  }),
+}));
+
 beforeAll(async () => {
   mongoServer = await MongoMemoryServer.create();
   const mongoURL = mongoServer.getUri();
