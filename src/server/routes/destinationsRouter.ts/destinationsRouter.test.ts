@@ -11,6 +11,21 @@ let mongoServer: MongoMemoryServer;
 let mockToken: string;
 let destinationsDelete: string;
 
+jest.mock("@supabase/supabase-js", () => ({
+  createClient: () => ({
+    storage: {
+      from: () => ({
+        upload: jest.fn().mockReturnValue({
+          error: false,
+        }),
+        getPublicUrl: () => ({
+          publicURL: "Image url",
+        }),
+      }),
+    },
+  }),
+}));
+
 beforeAll(async () => {
   mongoServer = await MongoMemoryServer.create();
   const mongoURL = mongoServer.getUri();
@@ -36,9 +51,10 @@ beforeEach(async () => {
   const mockDestination = await Destination.create({
     destination: "Nepal",
     image: "A",
+    backupImage: "A",
     latitude: 200,
     longitud: 1000,
-    cateogry: "adventure",
+    category: "adventure",
     firstPlan: "Himalaya",
     descriptionFirstPlan: "trekking",
     owner: mockUser.id,
