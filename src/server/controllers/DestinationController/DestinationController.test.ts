@@ -295,15 +295,15 @@ describe("Given a getDestinationById", () => {
       json: jest.fn(),
     };
 
-    const req: Partial<Request> = {
-      params: {
-        idDestination: "1",
-      },
-    };
-
     const next = jest.fn();
 
     describe("And receives a id of a valid destiantion", () => {
+      const req: Partial<Request> = {
+        params: {
+          idDestination: "1",
+        },
+      };
+
       test("Then it should invoke the responses method status with a 200 and json method with the same valid dog", async () => {
         const mockDestination = {
           destination: "Nepal",
@@ -334,14 +334,36 @@ describe("Given a getDestinationById", () => {
     });
 
     describe("And receives a id destination invalid", () => {
-      test("Then it should invoke next function with an error message 'Error to find destination'", async () => {
+      const req: Partial<Request> = {
+        params: {},
+      };
+
+      test("Then it should invoke next function with an error message 'Destination not found'", async () => {
         const ErrorCustomTest = new ErrorCustom(
-          400,
+          404,
           "",
-          "Error finding destination"
+          "Dstination not found"
         );
 
         Destination.findById = jest.fn().mockRejectedValue(new Error());
+
+        await getDestinationById(
+          req as Request,
+          res as Response,
+          next as NextFunction
+        );
+
+        expect(next).toHaveBeenCalledWith(ErrorCustomTest);
+      });
+
+      test("Then it should invoke next function with an error message 'Error to find destination'", async () => {
+        const ErrorCustomTest = new ErrorCustom(
+          404,
+          "",
+          "Dstination not found"
+        );
+
+        Destination.findById = jest.fn().mockReturnValue(null);
 
         await getDestinationById(
           req as Request,
