@@ -3,42 +3,33 @@ import path from "path";
 import fs from "fs/promises";
 import { CustomRequest } from "../../../interfaces/interfaces";
 import supabase from "./supabase";
-import ErrorCustom from "../../../utils/Error/ErrorCustom";
 
 const storageSupabase = async (
   req: CustomRequest,
   res: Response,
   next: NextFunction
 ) => {
-  try {
-    const { filename, originalname } = req.file;
-    const storage = supabase.storage.from("mmlore-final-project");
+  const { filename, originalname } = req.file;
 
-    const newPictureName = `${Date.now()}-${originalname}`;
+  const storage = supabase.storage.from("mmlore-final-project");
 
-    await fs.rename(
-      path.join("uploads", filename),
-      path.join("uploads", newPictureName)
-    );
+  const newPictureName = `${Date.now()}-${originalname}`;
 
-    const readFile = await fs.readFile(path.join("uploads", newPictureName));
+  await fs.rename(
+    path.join("uploads", filename),
+    path.join("uploads", newPictureName)
+  );
 
-    await storage.upload(newPictureName, readFile);
+  const readFile = await fs.readFile(path.join("uploads", newPictureName));
 
-    const imageUrl = storage.getPublicUrl(newPictureName);
+  await storage.upload(newPictureName, readFile);
 
-    req.body.image = newPictureName;
-    req.body.backupImage = imageUrl.publicURL;
+  const imageUrl = storage.getPublicUrl(newPictureName);
 
-    next();
-  } catch (error) {
-    const customError = new ErrorCustom(
-      400,
-      error.message,
-      "Error uploading images"
-    );
-    next(customError);
-  }
+  req.body.image = newPictureName;
+  req.body.backupImage = imageUrl.publicURL;
+
+  next();
 };
 
 export default storageSupabase;

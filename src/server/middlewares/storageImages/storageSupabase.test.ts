@@ -32,8 +32,7 @@ beforeAll(async () => {
   await fs.writeFile(path.join("uploads", "test"), "content");
 });
 
-afterAll(async () => {
-  await fs.unlink("uploads/image.png");
+afterEach(async () => {
   jest.clearAllMocks();
 });
 describe("Given a storageSupabase function", () => {

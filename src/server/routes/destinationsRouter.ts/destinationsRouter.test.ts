@@ -26,6 +26,11 @@ jest.mock("@supabase/supabase-js", () => ({
   }),
 }));
 
+jest.mock("fs/promises", () => ({
+  ...jest.requireActual("fs/promises"),
+  readFile: jest.fn(),
+}));
+
 beforeAll(async () => {
   mongoServer = await MongoMemoryServer.create();
   const mongoURL = mongoServer.getUri();
@@ -123,7 +128,7 @@ describe("Given the endpoint DELETE /destinations/:idDestination", () => {
   });
 
   describe("When it receives a request with method get and an ivalid user token", () => {
-    test("Then it should response with status 404 and an object with a property 'destinations'", async () => {
+    test("Then it should response with status 500 and an object with a property 'destinations'", async () => {
       const expectedStatus = 500;
       const message = "General error";
 
