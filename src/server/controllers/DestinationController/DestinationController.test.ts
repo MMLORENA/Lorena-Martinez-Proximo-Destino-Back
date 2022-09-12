@@ -212,7 +212,7 @@ describe("Given a createDestination", () => {
         image: "A",
         backupImage: "A",
         latitude: 200,
-        longitud: 1000,
+        longitude: 1000,
         category: "adventure",
         firstPlan: "Himalaya",
         descriptionFirstPlan: "trekking",
@@ -227,8 +227,8 @@ describe("Given a createDestination", () => {
       test("Then it should call the response method status with 200", async () => {
         const status = 201;
 
-        User.findOneAndUpdate = jest.fn();
-        Destination.create = jest.fn();
+        Destination.create = jest.fn().mockResolvedValue({ id: "1234" });
+        User.findOneAndUpdate = jest.fn().mockResolvedValueOnce(true);
 
         await createDestination(
           req as CustomRequest,
@@ -242,8 +242,8 @@ describe("Given a createDestination", () => {
       test("Then it should call the response method json with message", async () => {
         const expectedJson = { message: "New Destination created succesfully" };
 
-        User.findOneAndUpdate = jest.fn();
-        Destination.create = jest.fn();
+        Destination.create = jest.fn().mockResolvedValue({ id: "1234" });
+        User.findOneAndUpdate = jest.fn().mockResolvedValueOnce(true);
 
         await createDestination(
           req as CustomRequest,

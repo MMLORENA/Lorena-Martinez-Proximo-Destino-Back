@@ -6,7 +6,7 @@ const createDestinationValidation = {
     image: Joi.string().required(),
     backupImage: Joi.string().required(),
     latitude: Joi.number().required(),
-    longitud: Joi.number().required(),
+    longitude: Joi.number().required(),
     category: Joi.string().required(),
     firstPlan: Joi.string().required(),
     descriptionFirstPlan: Joi.string().required(),

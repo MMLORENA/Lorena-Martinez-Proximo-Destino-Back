@@ -5,7 +5,7 @@ import { NextFunction, Request, Response } from "express";
 import { ValidationError } from "express-validation";
 import ErrorCustom from "../../../utils/Error/ErrorCustom";
 
-const debug = Debug("destinos:server:controllers:usersControllers");
+const debug = Debug("destinos:server:controllers:errorControllers");
 
 export const generalError = (
   error: ErrorCustom,
