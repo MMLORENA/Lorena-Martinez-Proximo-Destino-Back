@@ -104,14 +104,19 @@ export const getDestinationById = async (
     const { idDestination } = req.params;
 
     const destinationById = await Destination.findById({ _id: idDestination });
+
+    if (!destinationById) {
+      throw new Error();
+    }
+
     res.status(200).json({ destination: destinationById });
 
     debug(chalk.green(`Request get by id has been received`));
   } catch (error) {
     const customError = new ErrorCustom(
-      400,
+      404,
       error.message,
-      "Error finding destination"
+      "Destination not found"
     );
     next(customError);
   }

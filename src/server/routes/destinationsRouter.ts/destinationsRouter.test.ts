@@ -10,6 +10,7 @@ import { createToken } from "../../../utils/auth/auth";
 let mongoServer: MongoMemoryServer;
 let mockToken: string;
 let destinationsDelete: string;
+let destinationById: string;
 
 jest.mock("@supabase/supabase-js", () => ({
   createClient: () => ({
@@ -69,6 +70,7 @@ beforeEach(async () => {
   mockUser.save();
 
   destinationsDelete = `/destinations/delete/${mockDestination.id}`;
+  destinationById = `/destinations/${mockDestination.id}`;
 });
 
 afterEach(async () => {
@@ -138,6 +140,21 @@ describe("Given the endpoint DELETE /destinations/:idDestination", () => {
         .expect(expectedStatus);
 
       expect(body).toHaveProperty("error", message);
+    });
+  });
+});
+
+describe("Given the endpoint GET /destinations/:idDestination", () => {
+  describe("When it receives a request with method get and a valid id Destination", () => {
+    test("Then it should response with status 200 and an object with a property destintion", async () => {
+      const expectedStatus = 200;
+
+      const { body } = await request(app)
+        .get(destinationById)
+        .set("Authorization", `Bearer ${mockToken}`)
+        .expect(expectedStatus);
+
+      expect(body).toHaveProperty("destination");
     });
   });
 });

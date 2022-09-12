@@ -155,6 +155,29 @@
         }
       },
       "response": []
+    },
+    {
+      "name": "getById",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMTc1ZDEzZWYxODRjMjlhOTJkMmU2NyIsInVzZXJOYW1lIjoiTG8iLCJpYXQiOjE2NjI2MzU3OTF9.99C3sNBsNS2t51VYNhWxg7osBQSXrQBk1mXAvWH195Q",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{destLoc}}destinations/631f51ccfd4299174c8ae8c7",
+          "host": ["{{destLoc}}destinations"],
+          "path": ["631f51ccfd4299174c8ae8c7"]
+        }
+      },
+      "response": []
     }
   ],
   "event": [
