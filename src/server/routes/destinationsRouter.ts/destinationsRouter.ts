@@ -5,6 +5,7 @@ import multer from "multer";
 import {
   createDestination,
   deleteDestination,
+  getDestinationById,
   getUserDestinations,
 } from "../../controllers/DestinationController/DestinationController";
 import storageSupabase from "../../middlewares/storageImages/storageSupabase";
@@ -15,6 +16,11 @@ const upload = multer({ dest: "uploads/", limits: { fileSize: 5000000 } });
 
 const destinationsRouter = express.Router();
 destinationsRouter.get("/", userAuthentication, getUserDestinations);
+destinationsRouter.get(
+  "/:idDestination",
+  userAuthentication,
+  getDestinationById
+);
 destinationsRouter.delete(
   "/delete/:idDestination",
   userAuthentication,

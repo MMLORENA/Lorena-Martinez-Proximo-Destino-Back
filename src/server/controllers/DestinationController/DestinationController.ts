@@ -1,7 +1,7 @@
 import "../../../loadEnvironment";
 import Debug from "debug";
 import chalk from "chalk";
-import { NextFunction, Response } from "express";
+import { Request, NextFunction, Response } from "express";
 import User from "../../../database/models/User";
 import ErrorCustom from "../../../utils/Error/ErrorCustom";
 import { CustomRequest } from "../../../interfaces/interfaces";
@@ -90,6 +90,28 @@ export const createDestination = async (
       400,
       error.message,
       "Error creating new destination"
+    );
+    next(customError);
+  }
+};
+
+export const getDestinationById = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { idDestination } = req.params;
+
+    const destinationById = await Destination.findById({ _id: idDestination });
+    res.status(200).json({ destination: destinationById });
+
+    debug(chalk.green(`Request get by id has been received`));
+  } catch (error) {
+    const customError = new ErrorCustom(
+      400,
+      error.message,
+      "Error finding destination"
     );
     next(customError);
   }
