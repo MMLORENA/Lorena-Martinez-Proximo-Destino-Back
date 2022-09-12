@@ -1,4 +1,4 @@
-import { NextFunction, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import Destination from "../../../database/models/Destination";
 import User from "../../../database/models/User";
 import {
@@ -9,6 +9,7 @@ import ErrorCustom from "../../../utils/Error/ErrorCustom";
 import {
   createDestination,
   deleteDestination,
+  getDestinationById,
   getUserDestinations,
 } from "./DestinationController";
 
@@ -263,6 +264,7 @@ describe("Given a createDestination", () => {
           body: bodyDestination,
           payload: mockPayloadUser,
         };
+
         const ErrorCustomTest = new ErrorCustom(
           400,
           "",
@@ -276,6 +278,73 @@ describe("Given a createDestination", () => {
 
         await createDestination(
           req as CustomRequest,
+          res as Response,
+          next as NextFunction
+        );
+
+        expect(next).toHaveBeenCalledWith(ErrorCustomTest);
+      });
+    });
+  });
+});
+
+describe("Given a getDestinationById", () => {
+  describe("When its called with a with a request, response and a next function", () => {
+    const res: Partial<Response> = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+    };
+
+    const req: Partial<Request> = {
+      params: {
+        idDestination: "1",
+      },
+    };
+
+    const next = jest.fn();
+
+    describe("And receives a id of a valid destiantion", () => {
+      test("Then it should invoke the responses method status with a 200 and json method with the same valid dog", async () => {
+        const mockDestination = {
+          destination: "Nepal",
+          image: "A",
+          latitude: 200,
+          longitud: 1000,
+          cateogry: "adventure",
+          firstPlan: "Himalaya",
+          descriptionFirstPlan: "trekking",
+          owner: "63175d13ef184c29a92d2e67",
+          id: "63175bcd3349cd8da4ca9dbd",
+        };
+
+        const expectedStatus = 200;
+        const expectedMessage = { destination: mockDestination };
+
+        Destination.findById = jest.fn().mockResolvedValue(mockDestination);
+
+        await getDestinationById(
+          req as Request,
+          res as Response,
+          next as NextFunction
+        );
+
+        expect(res.status).toHaveBeenCalledWith(expectedStatus);
+        expect(res.json).toHaveBeenCalledWith(expectedMessage);
+      });
+    });
+
+    describe("And receives a id destination invalid", () => {
+      test("Then it should invoke next function with an error message 'Error to find destination'", async () => {
+        const ErrorCustomTest = new ErrorCustom(
+          400,
+          "",
+          "Error finding destination"
+        );
+
+        Destination.findById = jest.fn().mockRejectedValue(new Error());
+
+        await getDestinationById(
+          req as Request,
           res as Response,
           next as NextFunction
         );
