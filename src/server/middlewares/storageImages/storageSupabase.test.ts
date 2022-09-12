@@ -33,7 +33,7 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
-  // await fs.unlink("uploads/image.png");
+  await fs.unlink("uploads/image.png");
   jest.clearAllMocks();
 });
 describe("Given a storageSupabase function", () => {
