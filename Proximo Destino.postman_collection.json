@@ -92,6 +92,69 @@
         }
       },
       "response": []
+    },
+    {
+      "name": "createDestination",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMTc1ZDEzZWYxODRjMjlhOTJkMmU2NyIsInVzZXJOYW1lIjoiTG8iLCJpYXQiOjE2NjI2MzU3OTF9.99C3sNBsNS2t51VYNhWxg7osBQSXrQBk1mXAvWH195Q",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "image",
+              "type": "file",
+              "src": "/C:/Users/loren/Downloads/Bg.jpg"
+            },
+            {
+              "key": "destination",
+              "value": "\"Bcn 18\"\n",
+              "type": "text"
+            },
+            {
+              "key": "category",
+              "value": "\"beach\"",
+              "type": "text"
+            },
+            {
+              "key": "longitud",
+              "value": "20",
+              "type": "text"
+            },
+            {
+              "key": "latitude",
+              "value": "20",
+              "type": "text"
+            },
+            {
+              "key": "firstPlan",
+              "value": "\"trekking\"",
+              "type": "text"
+            },
+            {
+              "key": "descriptionFirstPlan",
+              "value": "\"ass\"",
+              "type": "text"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{destLoc}}destinations/create",
+          "host": ["{{destLoc}}destinations"],
+          "path": ["create"]
+        }
+      },
+      "response": []
     }
   ],
   "event": [
