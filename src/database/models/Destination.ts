@@ -17,7 +17,7 @@ const DestinationSchema = new Schema({
     type: Number,
     required: true,
   },
-  longitud: {
+  longitude: {
     type: Number,
     required: true,
   },
