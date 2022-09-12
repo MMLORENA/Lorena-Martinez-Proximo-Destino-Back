@@ -1,237 +1,211 @@
 {
-	"info": {
-		"_postman_id": "c289caca-9d12-4d94-9f20-c0b420c98e87",
-		"name": "Proximo Destino",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "22256142"
-	},
-	"item": [
-		{
-			"name": "EnpointNotFound",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{destLoc}}",
-					"host": [
-						"{{destLoc}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Register",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n  \"name\": \"Maridd\",\r\n  \"firstName\": \"a\",\r\n  \"userName\": \"asd\",\r\n    \"password\": \"1245\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{destLoc}}user/register",
-					"host": [
-						"{{destLoc}}user"
-					],
-					"path": [
-						"register"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Login",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"userName\": \"Admin\",\r\n    \"password\": \"Admin\"\r\n\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{destLoc}}user/login",
-					"host": [
-						"{{destLoc}}user"
-					],
-					"path": [
-						"login"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "userDestinations",
-			"request": {
-				"method": "GET",
-				"header": []
-			},
-			"response": []
-		},
-		{
-			"name": "deleteDestination",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMTc1ZDEzZWYxODRjMjlhOTJkMmU2NyIsInVzZXJOYW1lIjoiTG8iLCJpYXQiOjE2NjI2MzU3OTF9.99C3sNBsNS2t51VYNhWxg7osBQSXrQBk1mXAvWH195Q",
-							"type": "string"
-						}
-					]
-				},
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "{{destLoc}}destinations/6319ceab3349cd8da4ca9deffg",
-					"host": [
-						"{{destLoc}}destinations"
-					],
-					"path": [
-						"6319ceab3349cd8da4ca9deffg"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "createDestination",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMTc1ZDEzZWYxODRjMjlhOTJkMmU2NyIsInVzZXJOYW1lIjoiTG8iLCJpYXQiOjE2NjI2MzU3OTF9.99C3sNBsNS2t51VYNhWxg7osBQSXrQBk1mXAvWH195Q",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "image",
-							"type": "file",
-							"src": "/C:/Users/loren/Downloads/Bg.jpg"
-						},
-						{
-							"key": "destination",
-							"value": "\"Bcn 18\"\n",
-							"type": "text"
-						},
-						{
-							"key": "category",
-							"value": "\"beach\"",
-							"type": "text"
-						},
-						{
-							"key": "longitud",
-							"value": "20",
-							"type": "text"
-						},
-						{
-							"key": "latitude",
-							"value": "20",
-							"type": "text"
-						},
-						{
-							"key": "firstPlan",
-							"value": "\"trekking\"",
-							"type": "text"
-						},
-						{
-							"key": "descriptionFirstPlan",
-							"value": "\"ass\"",
-							"type": "text"
-						}
-					]
-				},
-				"url": {
-					"raw": "{{destLoc}}destinations/create",
-					"host": [
-						"{{destLoc}}destinations"
-					],
-					"path": [
-						"create"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "getById",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMTc1ZDEzZWYxODRjMjlhOTJkMmU2NyIsInVzZXJOYW1lIjoiTG8iLCJpYXQiOjE2NjI2MzU3OTF9.99C3sNBsNS2t51VYNhWxg7osBQSXrQBk1mXAvWH195Q",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{destLoc}}destinations/631f51ccfd4299174c8ae8c7",
-					"host": [
-						"{{destLoc}}destinations"
-					],
-					"path": [
-						"631f51ccfd4299174c8ae8c7"
-					]
-				}
-			},
-			"response": []
-		}
-	],
-	"event": [
-		{
-			"listen": "prerequest",
-			"script": {
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
-		},
-		{
-			"listen": "test",
-			"script": {
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
-		}
-	],
-	"variable": [
-		{
-			"key": "destLoc",
-			"value": "http://localhost:3333/",
-			"type": "string"
-		},
-		{
-			"key": "destDep",
-			"value": "https://lmartinez-final-project-202207.herokuapp.com/",
-			"type": "string"
-		}
-	]
+  "info": {
+    "_postman_id": "c289caca-9d12-4d94-9f20-c0b420c98e87",
+    "name": "Proximo Destino",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "22256142"
+  },
+  "item": [
+    {
+      "name": "EnpointNotFound",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{destLoc}}",
+          "host": ["{{destLoc}}"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Register",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"name\": \"Maridd\",\r\n  \"firstName\": \"a\",\r\n  \"userName\": \"asd\",\r\n    \"password\": \"1245\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{destLoc}}user/register",
+          "host": ["{{destLoc}}user"],
+          "path": ["register"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"userName\": \"Admin\",\r\n    \"password\": \"Admin\"\r\n\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{destLoc}}user/login",
+          "host": ["{{destLoc}}user"],
+          "path": ["login"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "userDestinations",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": []
+    },
+    {
+      "name": "deleteDestination",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMTc1ZDEzZWYxODRjMjlhOTJkMmU2NyIsInVzZXJOYW1lIjoiTG8iLCJpYXQiOjE2NjI2MzU3OTF9.99C3sNBsNS2t51VYNhWxg7osBQSXrQBk1mXAvWH195Q",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{destLoc}}destinations/6319ceab3349cd8da4ca9deffg",
+          "host": ["{{destLoc}}destinations"],
+          "path": ["6319ceab3349cd8da4ca9deffg"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "createDestination",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMTc1ZDEzZWYxODRjMjlhOTJkMmU2NyIsInVzZXJOYW1lIjoiTG8iLCJpYXQiOjE2NjI2MzU3OTF9.99C3sNBsNS2t51VYNhWxg7osBQSXrQBk1mXAvWH195Q",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "image",
+              "type": "file",
+              "src": "/C:/Users/loren/Downloads/Bg.jpg"
+            },
+            {
+              "key": "destination",
+              "value": "\"Bcn 18\"\n",
+              "type": "text"
+            },
+            {
+              "key": "category",
+              "value": "\"beach\"",
+              "type": "text"
+            },
+            {
+              "key": "longitud",
+              "value": "20",
+              "type": "text"
+            },
+            {
+              "key": "latitude",
+              "value": "20",
+              "type": "text"
+            },
+            {
+              "key": "firstPlan",
+              "value": "\"trekking\"",
+              "type": "text"
+            },
+            {
+              "key": "descriptionFirstPlan",
+              "value": "\"ass\"",
+              "type": "text"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{destLoc}}destinations/create",
+          "host": ["{{destLoc}}destinations"],
+          "path": ["create"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getById",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMTc1ZDEzZWYxODRjMjlhOTJkMmU2NyIsInVzZXJOYW1lIjoiTG8iLCJpYXQiOjE2NjI2MzU3OTF9.99C3sNBsNS2t51VYNhWxg7osBQSXrQBk1mXAvWH195Q",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{destLoc}}destinations/631f51ccfd4299174c8ae8c7",
+          "host": ["{{destLoc}}destinations"],
+          "path": ["631f51ccfd4299174c8ae8c7"]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "destLoc",
+      "value": "http://localhost:3333/",
+      "type": "string"
+    },
+    {
+      "key": "destDep",
+      "value": "https://lmartinez-final-project-202207.herokuapp.com/",
+      "type": "string"
+    }
+  ]
 }
