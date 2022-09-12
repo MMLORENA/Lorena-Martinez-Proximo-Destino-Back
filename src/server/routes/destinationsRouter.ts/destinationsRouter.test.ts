@@ -53,7 +53,7 @@ beforeEach(async () => {
     image: "A",
     backupImage: "A",
     latitude: 200,
-    longitud: 1000,
+    longitude: 1000,
     category: "adventure",
     firstPlan: "Himalaya",
     descriptionFirstPlan: "trekking",

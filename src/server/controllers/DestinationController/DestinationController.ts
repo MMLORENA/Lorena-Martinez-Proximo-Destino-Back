@@ -74,12 +74,12 @@ export const createDestination = async (
 
   try {
     newDestination.owner = id;
-    const newDestinationCreated = await Destination.create(newDestination);
 
+    const newDestinationCreated = await Destination.create(newDestination);
     await User.findOneAndUpdate(
       { _id: id },
       {
-        $push: { destinations: newDestinationCreated },
+        $push: { destinations: newDestinationCreated.id },
       }
     );
     res.status(201).json({ message: "New Destination created succesfully" });
