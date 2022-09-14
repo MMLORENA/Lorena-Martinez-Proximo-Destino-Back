@@ -8,6 +8,7 @@ import {
   getDestinationById,
   getUserDestinations,
 } from "../../controllers/DestinationController/DestinationController";
+import resizeImage from "../../middlewares/resizeImages/resizeImages";
 import storageSupabase from "../../middlewares/storageImages/storageSupabase";
 import userAuthentication from "../../middlewares/userAuthentication/userAuthentication";
 import createDestinationValidation from "../../schemas/destinationsCredentialSchema";
@@ -30,6 +31,7 @@ destinationsRouter.post(
   "/create",
   userAuthentication,
   upload.single("image"),
+  resizeImage,
   storageSupabase,
   validate(createDestinationValidation, {}, { abortEarly: false }),
   createDestination
