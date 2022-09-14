@@ -9,11 +9,11 @@ const storageSupabase = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { filename, originalname } = req.file;
+  const { filename } = req.file;
 
   const storage = supabase.storage.from("mmlore-final-project");
 
-  const newPictureName = `${Date.now()}-${originalname}`;
+  const newPictureName = `${Date.now()}-${filename}`;
 
   await fs.rename(
     path.join("uploads", filename),
